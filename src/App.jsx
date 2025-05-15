@@ -42,12 +42,14 @@ function App() {
     setEmpanadas([{ gusto: gustos[0], cantidad: 1 }]);
     };
 
-    const resumenPorGusto = personas.reduce((acc, persona) => {
+    const resumenPorGusto = personas.reduce((num, persona) => {
     persona.empanadas.forEach(({ gusto, cantidad }) => {
-        acc[gusto] = (acc[gusto] || 0) + cantidad;
+        num[gusto] = (num[gusto] || 0) + cantidad;
     });
-    return acc;
+    return num;
     }, {});
+
+    const generarOpciones = (opciones) => opciones.map((valor) => <option key={valor} value={valor}>{valor}</option>);
 
     return (
         <div class="container">
@@ -55,16 +57,12 @@ function App() {
             <form onSubmit={submit} class="formulario">
                 <div class="fila">
                     <input type="text" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} class="input" required/>
-                    <select value={sector} onChange={(e) => setSector(e.target.value)} class="input">{sectores.map((s) => (<option key={s}>{s}</option>))}</select>
+                    <select value={sector} onChange={(e) => setSector(e.target.value)} class="input">{generarOpciones(sectores)}</select>
                 </div>
             
                 {empanadas.map((item, i) => (
                 <div key={i} class="fila">
-                    <select value={item.gusto} onChange={(e) => cambioDeEmpanadas(i, "gusto", e.target.value)} class="select-gusto">
-                    {gustos.map((g) => (
-                        <option key={g}>{g}</option>
-                    ))}
-                    </select>
+                    <select value={item.gusto} onChange={(e) => cambioDeEmpanadas(i, "gusto", e.target.value)} class="select-gusto">{generarOpciones(gustos)}</select>
                     <input type="number" value={item.cantidad} onChange={(e) => cambioDeEmpanadas(i, "cantidad", e.target.value)} class="input-cantidad" min={1}/>
                 </div>
                 ))}
