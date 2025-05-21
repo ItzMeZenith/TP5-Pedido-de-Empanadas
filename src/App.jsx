@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css' 
 
 const sectores = ["Sistemas", "Finanzas", "Ventas", "Recursos Humanos", "Soporte", "Depósito",]; 
-const gustos = ["Carne", "Pollo", "Jamon y Queso", "Queso y Cebolla", "Carne Picante", "Verdura", "Carne cortada a cuchillo", "Dulce de Leche"]; 
+const gustos = ["Carne", "Pollo", "Jamon y Queso", "Queso y Cebolla", "Carne Picante", "Verdura", "Humita", "Carne cortada a cuchillo", "Dulce de Leche"]; 
 
 function App() {
 
