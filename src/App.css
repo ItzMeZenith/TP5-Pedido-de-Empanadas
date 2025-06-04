@@ -62,6 +62,10 @@ html{
   background-color: #30c968;
 }
 
+.rojo {
+  background-color: #c93030;
+}
+
 .lista {
   list-style: none;
   padding: 0px;

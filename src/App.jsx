@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css' 
 
 const sectores = ["Sistemas", "Finanzas", "Ventas", "Recursos Humanos", "Soporte", "Depósito",]; 
@@ -9,7 +9,14 @@ function App() {
     const [nombre, setNombre] = useState("");
     const [sector, setSector] = useState(sectores[0]);
     const [empanadas, setEmpanadas] = useState([{ gusto: gustos[0], cantidad: 1 }]);
-    const [personas, setPersonas] = useState([]);
+    const [personas, setPersonas] = useState(() => {
+        const datosGuardados = localStorage.getItem('personas');
+        return datosGuardados ? JSON.parse(datosGuardados) : [];
+    });
+    
+    useEffect(() => {
+        localStorage.setItem('personas', JSON.stringify(personas));
+    }, [personas]);
 
     const agregarGusto = () => {
     setEmpanadas(empanadas.concat({ gusto: gustos[0], cantidad: 1 }));
@@ -87,6 +94,13 @@ function App() {
                 </li>
                 ))}
             </ul>
+            <button class="boton rojo" onClick={() => {
+                if (confirm("¿Estás seguro de que quieres borrar todos los pedidos?")) {
+                    setPersonas([]);
+                }
+            }}>
+                Borrar todos los pedidos
+            </button>
         </div>
     );
     }
